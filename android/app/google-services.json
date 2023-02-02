@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "251714301602",
+    "project_id": "liveasylogistic-be916",
+    "storage_bucket": "liveasylogistic-be916.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251714301602:android:288052bbbea28f173fb1fb",
+        "android_client_info": {
+          "package_name": "com.example.liveasylogistic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251714301602-chk74sdi7rk6p2a2c06uioaorn6g310m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.liveasylogistic",
+            "certificate_hash": "25e580d78d8ef842eb40f26ca76bdd51d3e092db"
+          }
+        },
+        {
+          "client_id": "251714301602-3es1a2meredq0igg4r128bukfo8fk1k3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzBq9rZYGMM6YjW9xi01jAb5-lekQ668s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251714301602-3es1a2meredq0igg4r128bukfo8fk1k3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
