@@ -17,22 +17,24 @@ class _LanguagePageState extends State<LanguagePage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Column(
           children: [
             const SizedBox(
-              height: 100,
+              height: 250,
             ),
-            Image.asset("images/image.png"),
+            Image.asset(
+              "images/image.png",
+            ),
             const SizedBox(
               height: 84,
             ),
             const Text("Please select your Language",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 25,
+                  fontSize: 30,
                   color: Colors.black,
                 )),
             const SizedBox(
@@ -42,15 +44,21 @@ class _LanguagePageState extends State<LanguagePage> {
               "You can change the language",
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 15,
+                fontSize: 20,
               ),
+            ),
+            const SizedBox(
+              height: 3,
             ),
             const Text(
               "at any time.",
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 15,
+                fontSize: 20,
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 4),
@@ -63,7 +71,7 @@ class _LanguagePageState extends State<LanguagePage> {
               ),
 
               width: screenWidth / 1.5,
-              height: screenHeight / 20,
+              height: screenHeight / 16,
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   icon: const Icon(
@@ -90,15 +98,13 @@ class _LanguagePageState extends State<LanguagePage> {
             ),
             ElevatedButton(
               onPressed: () {
-                
                 context.pushNamed(RouteName.mobileRouteName);
               },
               child: Container(
-                width: screenWidth / 6,
-                height: screenHeight / 17,
+                width: screenWidth / 1.65,
+                height: screenHeight / 16,
                 decoration: const BoxDecoration(
                   color: Colors.blue,
-                 
                 ),
                 child: const Center(
                     child: Text(
@@ -112,7 +118,7 @@ class _LanguagePageState extends State<LanguagePage> {
               ),
             ),
             const SizedBox(
-              height: 100,
+              height: 314.636,
             ),
             Image.asset(
               "images/1.png",

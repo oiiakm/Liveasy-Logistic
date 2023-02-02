@@ -19,89 +19,136 @@ class _OTPPageState extends State<OTPPage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     var smsCode = "";
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(8.0),
+      resizeToAvoidBottomInset: false,
+      body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 50,
+              height: 100,
             ),
-            IconButton(
-                color: Colors.white,
-                splashRadius: 0.1,
-                padding: EdgeInsets.fromLTRB(0, 0, screenWidth, 0),
-                onPressed: () {
-                  context.pushNamed(RouteName.mobileRouteName);
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                )),
-            const Text(
-              "Verify Phone",
+            SizedBox(
+              width: screenWidth - 35,
+              child: IconButton(
+                  color: Colors.white,
+                  splashRadius: 0.1,
+                  padding: EdgeInsets.fromLTRB(0, 0, screenWidth, 0),
+                  onPressed: () {
+                    context.pushNamed(RouteName.mobileRouteName);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                  )),
             ),
             const SizedBox(
-              height: 20,
+              height: 150,
             ),
-            Text("Code Send to ${MobilePage.mobileNumber}"),
+            const Text("Verify Phone",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  color: Colors.black,
+                )),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Code is sent to ${MobilePage.mobileNumber}",
+              style: const TextStyle(
+                color: Colors.black54,
+                fontSize: 20,
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
             OTPTextField(
+              keyboardType: TextInputType.number,
               length: 6,
-              width: MediaQuery.of(context).size.width,
-              fieldWidth: 40,
-              style: const TextStyle(fontSize: 17),
+              width: screenWidth / 1.2,
+              spaceBetween: 5,
+              fieldWidth: 55,
+              style: const TextStyle(
+                fontSize: 17,
+              ),
               textFieldAlignment: MainAxisAlignment.spaceAround,
               fieldStyle: FieldStyle.box,
-              onCompleted: (otp) {
+              onChanged: (otp) {
                 smsCode = otp;
               },
             ),
             const SizedBox(
               height: 20,
             ),
-            RichText(
-              text: const TextSpan(
-                  text: "Didn't receive the code?",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Colors.white,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: " Request Again",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                      ),
-                      // recognizer: TapGestureRecognizer()
-                      //   ..onTap = () {
-                      //     context.pushNamed(RouteName.);
-                      //   }
+            SizedBox(
+              width: screenWidth / 1.5,
+              height: screenHeight / 18,
+              child: RichText(
+                text: const TextSpan(
+                    text: "Didn't receive the code?",
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 18,
                     ),
-                  ]),
+                    children: [
+                      TextSpan(
+                        text: " Request Again",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
+                        // recognizer: TapGestureRecognizer()
+                        //   ..onTap = () {
+                        //     context.pushNamed(RouteName.);
+                        //   }
+                      ),
+                    ]),
+              ),
+            ),
+            const SizedBox(
+              height: 8,
             ),
             ElevatedButton(
                 onPressed: () async {
-                  try {
-                    PhoneAuthCredential credential =
-                        PhoneAuthProvider.credential(
-                            verificationId: MobilePage.verify,
-                            smsCode: smsCode);
-                    await auth.signInWithCredential(credential);
-                    context.pushNamed(RouteName.profileRouteName);
-                  } catch (e) {
-                    if (smsCode.isEmpty) {
-                      Fluttertoast.showToast(msg: "Please enter the OTP");
-                    } else {
-                      Fluttertoast.showToast(msg: e.toString());
-                    }
-                  }
+                  // try {
+                  PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                      verificationId: MobilePage.verify, smsCode: smsCode);
+                  await auth.signInWithCredential(credential);
+
+                  context.pushNamed(RouteName.profileRouteName);
+                  // } on FirebaseAuthMultiFactorExceptionPlatform catch (e) {
+                  //   if (smsCode.isEmpty) {
+                  //     Fluttertoast.showToast(msg: "Please enter the OTP");
+                  //   } else {
+                  //     Fluttertoast.showToast(msg: e.toString());
+                  //   }
+                  // }
                 },
-                child: const Text("VERIFY AND CONTINUE")),
-           
+                child: SizedBox(
+                  width: screenWidth / 1.35,
+                  height: screenHeight / 18,
+                  child: const Center(
+                    child: Text(
+                      "VERIFY AND CONTINUE",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                )),
+            const SizedBox(
+              height: 317.3,
+            ),
+            Image.asset(
+              "images/3.png",
+              width: screenWidth,
+              fit: BoxFit.cover,
+            ),
           ],
         ),
       ),
