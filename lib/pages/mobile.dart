@@ -35,7 +35,7 @@ class _MobilePageState extends State<MobilePage> {
                   splashRadius: 0.1,
                   padding: EdgeInsets.fromLTRB(0, 0, screenWidth, 0),
                   onPressed: () {
-                    context.pushNamed(RouteName.languageRouteName);
+                    context.pushReplacementNamed(RouteName.languageRouteName);
                   },
                   icon: const Icon(
                     Icons.clear,
@@ -90,8 +90,6 @@ class _MobilePageState extends State<MobilePage> {
                   ),
                 ),
                 initialCountryCode: 'IN',
-                //keyboardType: TextInputType.phone,
-
                 onChanged: (phone) {
                   MobilePage.mobileNumber = phone.completeNumber;
                 },
@@ -106,7 +104,7 @@ class _MobilePageState extends State<MobilePage> {
                     verificationFailed: (FirebaseAuthException e) {},
                     codeSent: (String verificationId, int? resendToken) {
                       MobilePage.verify = verificationId;
-                      context.pushNamed(
+                      context.pushReplacementNamed(
                         RouteName.otpRouteName,
                       );
                     },
@@ -125,7 +123,6 @@ class _MobilePageState extends State<MobilePage> {
                 height: screenHeight / 18,
                 decoration: const BoxDecoration(
                   color: Colors.blue,
-                  // borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: const Center(
                     child: Text(

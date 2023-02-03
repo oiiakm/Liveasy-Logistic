@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:liveasylogistic/pages/mobile.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/style.dart';
 import 'package:go_router/go_router.dart';
 import 'package:liveasylogistic/routes/name.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pinput/pinput.dart';
 
 class OTPPage extends StatefulWidget {
   const OTPPage({super.key});
@@ -16,11 +15,19 @@ class OTPPage extends StatefulWidget {
 
 class _OTPPageState extends State<OTPPage> {
   final FirebaseAuth auth = FirebaseAuth.instance;
+  var smsCode = TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+    smsCode.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    var smsCode = "";
+    // var smsCode = "";
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Center(
@@ -36,7 +43,7 @@ class _OTPPageState extends State<OTPPage> {
                   splashRadius: 0.1,
                   padding: EdgeInsets.fromLTRB(0, 0, screenWidth, 0),
                   onPressed: () {
-                    context.pushNamed(RouteName.mobileRouteName);
+                    context.pushReplacementNamed(RouteName.mobileRouteName);
                   },
                   icon: const Icon(
                     Icons.arrow_back,
@@ -65,20 +72,31 @@ class _OTPPageState extends State<OTPPage> {
             const SizedBox(
               height: 25,
             ),
-            OTPTextField(
-              keyboardType: TextInputType.number,
+            Pinput(
+              controller: smsCode,
+              closeKeyboardWhenCompleted: true,
               length: 6,
-              width: screenWidth / 1.2,
-              spaceBetween: 5,
-              fieldWidth: 55,
-              style: const TextStyle(
-                fontSize: 17,
+              showCursor: true,
+              defaultPinTheme: PinTheme(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.lightBlueAccent,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: Colors.black,
+                  ),
+                ),
+                textStyle: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-              textFieldAlignment: MainAxisAlignment.spaceAround,
-              fieldStyle: FieldStyle.box,
-              onChanged: (otp) {
-                smsCode = otp;
-              },
+              // onSubmitted: () {
+              //   setState(() {
+              //     smsCode = otp;
+              //   });
+              // },
             ),
             const SizedBox(
               height: 20,
@@ -113,19 +131,18 @@ class _OTPPageState extends State<OTPPage> {
             ),
             ElevatedButton(
                 onPressed: () async {
-                  // try {
-                  PhoneAuthCredential credential = PhoneAuthProvider.credential(
-                      verificationId: MobilePage.verify, smsCode: smsCode);
-                  await auth.signInWithCredential(credential);
+                  try {
+                    PhoneAuthCredential credential =
+                        PhoneAuthProvider.credential(
+                            verificationId: MobilePage.verify,
+                            smsCode: smsCode.text);
+                    await auth.signInWithCredential(credential);
 
-                  context.pushNamed(RouteName.profileRouteName);
-                  // } on FirebaseAuthMultiFactorExceptionPlatform catch (e) {
-                  //   if (smsCode.isEmpty) {
-                  //     Fluttertoast.showToast(msg: "Please enter the OTP");
-                  //   } else {
-                  //     Fluttertoast.showToast(msg: e.toString());
-                  //   }
-                  // }
+                    // ignore: use_build_context_synchronously
+                    context.pushReplacementNamed(RouteName.profileRouteName);
+                  } on FirebaseAuthException catch (e) {
+                    Fluttertoast.showToast(msg: e.toString());
+                  }
                 },
                 child: SizedBox(
                   width: screenWidth / 1.35,
@@ -142,7 +159,7 @@ class _OTPPageState extends State<OTPPage> {
                   ),
                 )),
             const SizedBox(
-              height: 317.3,
+              height: 305.3,
             ),
             Image.asset(
               "images/3.png",

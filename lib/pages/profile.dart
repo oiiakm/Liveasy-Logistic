@@ -46,7 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Colors.black,
                     )),
                 subtitle:
-                    const Text("lorem aaaaaaaaaaaaaaaaaaa\naaaaaaajjjjkjkjkjd",
+                    const Text("Brief details about the Shiper \nappears here",
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.black38,
@@ -80,12 +80,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       fontSize: 28,
                       color: Colors.black,
                     )),
-                subtitle:
-                    const Text("lorem aaaaaaaaaaaaaaaaaaa\naaaaaaajjjjkjkjkjd",
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black38,
-                        )),
+                subtitle: const Text(
+                    "Brief details about the Transporter \nappears here",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black38,
+                    )),
                 onChanged: (value) {
                   setState(() {
                     selectedValue = value!;
