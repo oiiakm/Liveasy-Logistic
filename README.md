@@ -1,16 +1,3 @@
-# liveasylogistic
+#Liveasy Logistic
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Liveasy is a logistic app that connects truck owners and transporters with shippers who need to move goods across India. Liveasy offers a hassle-free and transparent platform that enables users to book trucks, track shipments, manage payments and access analytics. Liveasy aims to simplify the logistics industry by providing reliable, cost-effective and efficient solutions for all stakeholders.
